@@ -1,0 +1,17 @@
+image: node:12
+
+before_script:
+  - apt-get update -qy
+  - apt-get install -y ruby-dev
+  - gem install dpl
+
+stages:
+  - heroku
+
+heroku:
+  stage: heroku
+  only:
+    - heroku
+  image: ruby:latest
+  script:
+    - dpl --provider=heroku --app=$HEROKU_CMANAGER_API --api-key=$HEROKU_API_KEY

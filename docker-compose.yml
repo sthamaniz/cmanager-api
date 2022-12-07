@@ -1,0 +1,47 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: cmanager_mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - ../mongo_database:/data/db/
+    restart: always
+    logging:
+      driver: none
+
+  mongo-express:
+    depends_on:
+      - mongodb
+    image: mongo-express:latest
+    environment:
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: 'true'
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+      ME_CONFIG_OPTIONS_EDITORTHEME: ambience
+      ME_CONFIG_MONGODB_SERVER: cmanager_mongodb
+      ME_CONFIG_BASICAUTH_USERNAME: local
+      ME_CONFIG_BASICAUTH_PASSWORD: pass
+    container_name: cmanager_mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    logging:
+      driver: none
+
+  api:
+    depends_on:
+      - mongo-express
+    build: .
+    image: cmanager/api:latest
+    env_file: .env
+    container_name: cmanager_api
+    volumes:
+      - ./src:/api/src/
+      - ./package.json:/api/package.json
+      - ./yarn.lock:/api/yarn.lock
+    restart: always
+    ports:
+      - 8080:8080
