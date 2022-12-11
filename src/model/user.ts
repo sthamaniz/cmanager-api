@@ -27,6 +27,10 @@ export const USER_ROLES = {
   CUSTOMER: 'CUSTOMER',
 };
 
+export const USER_ID_TYPES = {
+  DRIVING_LICENSE: 'DRIVING_LICENSE',
+};
+
 interface User {
   email: string;
   password: string;
@@ -39,6 +43,10 @@ interface User {
   role: string;
   source?: string;
   hours?: number;
+  australianBusinessNumber?: number;
+  taxFileNumber?: number;
+  idType?: string;
+  idNumber?: number;
   status: string;
   createdBy?: string;
   updatedBy?: string;
@@ -63,6 +71,10 @@ const UserSchema = new Schema(
     },
     source: { type: String, required: false },
     hours: { type: Number, required: false },
+    australianBusinessNumber: { type: Number, required: false },
+    taxFileNumber: { type: Number, required: false },
+    idType: { type: String, required: false },
+    idNumber: { type: Number, required: false },
     status: { type: String, required: true },
     createdBy: {
       type: Schema.Types.ObjectId,

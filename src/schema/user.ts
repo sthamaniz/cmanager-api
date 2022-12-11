@@ -14,6 +14,7 @@ import {
   UserRoleEnumType,
   UserObjectType,
   UserLoginObjectType,
+  UserIdTypeEnumType,
 } from './object/user';
 
 import * as userModel from '../model/user';
@@ -82,6 +83,10 @@ const mutation = {
       gender: { type: new GraphQLNonNull(UserGenderEnumType) },
       mobile: { type: new GraphQLNonNull(GraphQLString) },
       address: { type: GraphQLString },
+      australianBusinessNumber: { type: GraphQLInt },
+      taxFileNumber: { type: GraphQLInt },
+      idType: { type: UserIdTypeEnumType },
+      idNumber: { type: GraphQLInt },
       role: { type: new GraphQLNonNull(UserRoleEnumType) },
       source: { type: UserSourceEnumType },
       status: { type: new GraphQLNonNull(StatusEnumType) },
@@ -247,6 +252,10 @@ const mutation = {
       address: { type: GraphQLString },
       source: { type: UserSourceEnumType },
       hours: { type: GraphQLInt },
+      australianBusinessNumber: { type: GraphQLInt },
+      taxFileNumber: { type: GraphQLInt },
+      idType: { type: UserIdTypeEnumType },
+      idNumber: { type: GraphQLInt },
       status: { type: StatusEnumType },
     },
     authenticate: true,

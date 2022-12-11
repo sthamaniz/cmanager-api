@@ -11,6 +11,7 @@ import {
   USER_GENDERS,
   USER_SOURCES,
   USER_ROLES,
+  USER_ID_TYPES,
 } from '../../model/user';
 
 export const UserGenderEnumType = new GraphQLEnumType({
@@ -42,6 +43,13 @@ export const UserRoleEnumType = new GraphQLEnumType({
   },
 });
 
+export const UserIdTypeEnumType = new GraphQLEnumType({
+  name: 'UserIdType',
+  values: {
+    DRIVING_LICENSE: { value: USER_ID_TYPES.DRIVING_LICENSE },
+  },
+});
+
 export const UserObjectType = new GraphQLObjectType({
   name: 'User',
   fields: {
@@ -56,6 +64,10 @@ export const UserObjectType = new GraphQLObjectType({
     role: { type: UserRoleEnumType },
     source: { type: UserSourceEnumType },
     hours: { type: GraphQLInt },
+    australianBusinessNumber: { type: GraphQLInt },
+    taxFileNumber: { type: GraphQLInt },
+    idType: { type: UserIdTypeEnumType },
+    idNumber: { type: GraphQLInt },
     status: { type: StatusEnumType },
     createdBy: { type: GraphQLString },
     updatedBy: { type: GraphQLString },
