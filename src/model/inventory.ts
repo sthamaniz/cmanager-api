@@ -13,6 +13,7 @@ interface Inventory {
   title: string;
   slug: string;
   description: string;
+  unit: string;
   quantity: string;
   price: string;
   status: string;
@@ -30,6 +31,7 @@ const InventorySchema = new Schema(
     title: { type: String, required: true },
     slug: { type: String, required: false },
     description: { type: String, required: true },
+    unit: { type: String, required: true },
     quantity: { type: String, required: true },
     price: { type: String, required: true },
     status: { type: String, required: true },
