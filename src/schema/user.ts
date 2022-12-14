@@ -80,7 +80,7 @@ const mutation = {
       password: { type: new GraphQLNonNull(GraphQLString) },
       firstName: { type: new GraphQLNonNull(GraphQLString) },
       lastName: { type: new GraphQLNonNull(GraphQLString) },
-      gender: { type: new GraphQLNonNull(UserGenderEnumType) },
+      gender: { type: UserGenderEnumType },
       mobile: { type: new GraphQLNonNull(GraphQLString) },
       address: { type: GraphQLString },
       australianBusinessNumber: { type: GraphQLInt },

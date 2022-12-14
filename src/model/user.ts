@@ -60,7 +60,7 @@ const UserSchema = new Schema(
     password: { type: String, required: true, unique: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    gender: { type: String, required: true },
+    gender: { type: String, required: false },
     mobile: { type: String, required: true, unique: true },
     address: { type: String, required: false },
     displayPicture: { type: String, required: false },
