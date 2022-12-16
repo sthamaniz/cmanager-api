@@ -68,7 +68,7 @@ const mutation = {
         const { itemNumber, title } = input;
 
         //validation for already registered
-        const [inventoryWithItemNumber, inventoryWithTitle] =
+        const [[inventoryWithItemNumber], [inventoryWithTitle]] =
           await Promise.all([
             inventoryModel.fetch({
               itemNumber,
@@ -117,7 +117,7 @@ const mutation = {
         const { id, itemNumber, title } = input;
 
         //validation for already registered
-        const [inventoryWithItemNumber, inventoryWithTitle] =
+        const [[inventoryWithItemNumber], [inventoryWithTitle]] =
           await Promise.all([
             inventoryModel.fetch({
               itemNumber,
