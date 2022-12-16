@@ -6,6 +6,7 @@ export const InventoryObjectType = new GraphQLObjectType({
   name: 'Inventory',
   fields: {
     _id: { type: GraphQLString },
+    itemNumber: { type: GraphQLString },
     title: { type: GraphQLString },
     slug: { type: GraphQLString },
     description: { type: GraphQLString },

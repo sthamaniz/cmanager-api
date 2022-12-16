@@ -10,6 +10,7 @@ import { UserCollectionName } from './user';
 export const InventoryCollectionName = 'inventories';
 
 interface Inventory {
+  itemNumber: string;
   title: string;
   slug: string;
   description: string;
@@ -28,6 +29,7 @@ export interface InventoryModel
 
 const InventorySchema = new Schema(
   SchemaWithBaseTime({
+    itemNumber: { type: String, required: true },
     title: { type: String, required: true },
     slug: { type: String, required: false },
     description: { type: String, required: true },
