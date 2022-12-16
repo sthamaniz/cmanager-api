@@ -15,8 +15,8 @@ interface Inventory {
   slug: string;
   description: string;
   unit: string;
-  quantity: string;
-  price: string;
+  quantity: number;
+  price: number;
   status: string;
   createdBy?: string;
   updatedBy?: string;
@@ -34,8 +34,8 @@ const InventorySchema = new Schema(
     slug: { type: String, required: false },
     description: { type: String, required: true },
     unit: { type: String, required: true },
-    quantity: { type: String, required: true },
-    price: { type: String, required: true },
+    quantity: { type: Number, required: true },
+    price: { type: Number, required: true },
     status: { type: String, required: true },
     createdBy: {
       type: Schema.Types.ObjectId,

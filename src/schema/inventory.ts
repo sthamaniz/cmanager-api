@@ -3,6 +3,7 @@ import {
   GraphQLNonNull,
   GraphQLString,
   GraphQLError,
+  GraphQLInt,
 } from 'graphql';
 
 import { StatusEnumType } from './object/common';
@@ -58,8 +59,8 @@ const mutation = {
       title: { type: new GraphQLNonNull(GraphQLString) },
       description: { type: new GraphQLNonNull(GraphQLString) },
       unit: { type: new GraphQLNonNull(GraphQLString) },
-      quantity: { type: new GraphQLNonNull(GraphQLString) },
-      price: { type: new GraphQLNonNull(GraphQLString) },
+      quantity: { type: new GraphQLNonNull(GraphQLInt) },
+      price: { type: new GraphQLNonNull(GraphQLInt) },
       status: { type: new GraphQLNonNull(StatusEnumType) },
     },
     resolve: async (obj, input, request) => {
@@ -94,8 +95,8 @@ const mutation = {
       title: { type: GraphQLString },
       description: { type: GraphQLString },
       unit: { type: GraphQLString },
-      quantity: { type: GraphQLString },
-      price: { type: GraphQLString },
+      quantity: { type: GraphQLInt },
+      price: { type: GraphQLInt },
       status: { type: StatusEnumType },
     },
     authenticate: true,
