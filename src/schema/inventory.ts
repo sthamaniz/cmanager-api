@@ -65,16 +65,28 @@ const mutation = {
     },
     resolve: async (obj, input, request) => {
       try {
-        const { title } = input;
+        const { itemNumber, title } = input;
 
         //validation for already registered
-        const [inventoryWithTitle] = await inventoryModel.fetch({
-          title,
-        });
-        if (inventoryWithTitle)
+        const [inventoryWithItemNumber, inventoryWithTitle] =
+          await Promise.all([
+            inventoryModel.fetch({
+              itemNumber,
+            }),
+            inventoryModel.fetch({
+              title,
+            }),
+          ]);
+        if (inventoryWithItemNumber) {
           throw new Error(
             'Inventory with this title already exists.',
           );
+        }
+        if (inventoryWithTitle) {
+          throw new Error(
+            'Inventory with this title already exists.',
+          );
+        }
 
         //generating slug
         input.slug = util.generateSlug(input.title);
@@ -102,19 +114,34 @@ const mutation = {
     authenticate: true,
     resolve: async (obj, input, request) => {
       try {
-        const { id, title } = input;
+        const { id, itemNumber, title } = input;
 
         //validation for already registered
-        const [inventoryWithTitle] = await inventoryModel.fetch({
-          title,
-        });
+        const [inventoryWithItemNumber, inventoryWithTitle] =
+          await Promise.all([
+            inventoryModel.fetch({
+              itemNumber,
+            }),
+            inventoryModel.fetch({
+              title,
+            }),
+          ]);
         if (
-          inventoryWithTitle &&
-          inventoryWithTitle._id.toString() !== id
-        )
+          inventoryWithItemNumber &&
+          inventoryWithItemNumber._id.toString() !== id
+        ) {
           throw new Error(
             'Inventory with this title already exists.',
           );
+        }
+        if (
+          inventoryWithTitle &&
+          inventoryWithTitle._id.toString() !== id
+        ) {
+          throw new Error(
+            'Inventory with this title already exists.',
+          );
+        }
 
         //generating slug
         input.slug = util.generateSlug(input.title);
