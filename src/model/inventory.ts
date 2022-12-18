@@ -34,7 +34,7 @@ const InventorySchema = new Schema(
     slug: { type: String, required: false },
     description: { type: String, required: true },
     unit: { type: String, required: true },
-    quantity: { type: Number, required: true },
+    quantity: { type: Number, required: false, default: 0 },
     price: { type: Number, required: true },
     status: { type: String, required: true },
     createdBy: {

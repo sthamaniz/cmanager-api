@@ -1,5 +1,4 @@
 import {
-  GraphQLList,
   GraphQLNonNull,
   GraphQLString,
   GraphQLError,
@@ -15,6 +14,7 @@ import {
   UserObjectType,
   UserLoginObjectType,
   UserIdTypeEnumType,
+  UserWithPaginationObjectType,
 } from './object/user';
 
 import * as userModel from '../model/user';
@@ -27,7 +27,7 @@ import * as validation from '../util/validaton';
 
 const query = {
   users: {
-    type: new GraphQLList(UserObjectType),
+    type: UserWithPaginationObjectType,
     args: {
       role: { type: new GraphQLNonNull(UserRoleEnumType) },
       search: { type: GraphQLString },
@@ -110,16 +110,15 @@ const mutation = {
         }
 
         //validation for already registered
-        const [[userWithEmail], [userWithMobile]] = await Promise.all(
-          [
+        const [{ data: userWithEmail }, { data: userWithMobile }] =
+          await Promise.all([
             userModel.fetch({ email: email.toLowerCase() }),
             userModel.fetch({ mobile }),
-          ],
-        );
-        if (userWithEmail) {
+          ]);
+        if (userWithEmail && userWithEmail.length) {
           throw new Error('User with this email already exists.');
         }
-        if (userWithMobile) {
+        if (userWithMobile && userWithMobile.length) {
           throw new Error('User with this mobile already exists.');
         }
 
@@ -157,17 +156,17 @@ const mutation = {
         }
 
         //validating email exists
-        const [user] = await userModel.fetch({
+        const { data: user } = await userModel.fetch({
           email: email.toLowerCase(),
         });
-        if (!user) {
+        if (!user && user.length) {
           throw new GraphQLError('Email Not Found.');
         }
 
         //compare password
         const passwordCompare = await passwordService.compare(
           password,
-          user.password,
+          user[0].password,
         );
         if (!passwordCompare) {
           throw new GraphQLError('Password does not match');
@@ -175,11 +174,11 @@ const mutation = {
 
         //creating accessToken
         const accessToken = authTokenService.sign(
-          { userId: user._id },
+          { userId: user[0]._id },
           false,
         );
 
-        const response = { user: user, accessToken };
+        const response = { user: user[0], accessToken };
 
         return response;
       } catch (error) {
@@ -212,20 +211,21 @@ const mutation = {
         }
 
         //validation for already registered
-        const [[userWithEmail], [userWithMobile]] = await Promise.all(
-          [
+        const [{ data: userWithEmail }, { data: userWithMobile }] =
+          await Promise.all([
             userModel.fetch({ email: email.toLowerCase() }),
             userModel.fetch({ mobile }),
-          ],
-        );
+          ]);
         if (
           userWithEmail &&
-          userWithEmail._id.toString() !== requestUser
+          userWithEmail.length &&
+          userWithEmail[0]._id.toString() !== requestUser
         )
           throw new Error('User with this email already exists.');
         if (
           userWithMobile &&
-          userWithMobile._id.toString() !== requestUser
+          userWithMobile.length &&
+          userWithMobile[0]._id.toString() !== requestUser
         )
           throw new Error('User with this mobile already exists.');
 

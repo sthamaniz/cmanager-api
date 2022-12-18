@@ -3,6 +3,7 @@ import {
   GraphQLEnumType,
   GraphQLString,
   GraphQLInt,
+  GraphQLList,
 } from 'graphql';
 
 import { StatusEnumType } from './common';
@@ -73,6 +74,16 @@ export const UserObjectType = new GraphQLObjectType({
     updatedBy: { type: GraphQLString },
     createdAt: { type: GraphQLString },
     updatedAt: { type: GraphQLString },
+  },
+});
+
+export const UserWithPaginationObjectType = new GraphQLObjectType({
+  name: 'UserWithPagination',
+  fields: {
+    page: { type: GraphQLString },
+    limit: { type: GraphQLString },
+    total: { type: GraphQLString },
+    data: { type: new GraphQLList(UserObjectType) },
   },
 });
 

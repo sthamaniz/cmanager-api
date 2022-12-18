@@ -98,8 +98,26 @@ export const UserModel = model<UserModel>(
   UserCollectionName,
 );
 
-export const fetch = async (params: any = {}) => {
-  return UserModel.find(params);
+export const fetch = async (
+  params: any = {},
+  paginationParams: any = {},
+) => {
+  const { page, limit } = paginationParams;
+
+  const totalQuery = UserModel.count(params);
+  const dataQuery = UserModel.find(params);
+
+  if (page && limit) {
+    const skip = (parseInt(page) - 1) * limit;
+    dataQuery.skip(skip).limit(limit);
+  }
+
+  return {
+    page: page,
+    limit: limit,
+    total: await totalQuery,
+    data: await dataQuery,
+  };
 };
 
 export const fetchById = async (id: string) => {
