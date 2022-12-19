@@ -16,6 +16,7 @@ interface Inventory {
   description: string;
   unit: string;
   quantity: number;
+  lowStockQuantity: number;
   price: number;
   status: string;
   createdBy?: string;
@@ -35,6 +36,7 @@ const InventorySchema = new Schema(
     description: { type: String, required: true },
     unit: { type: String, required: true },
     quantity: { type: Number, required: false, default: 0 },
+    lowStockQuantity: { type: Number, required: true, default: 0 },
     price: { type: Number, required: true },
     status: { type: String, required: true },
     createdBy: {

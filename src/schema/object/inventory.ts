@@ -16,6 +16,7 @@ export const InventoryObjectType = new GraphQLObjectType({
     description: { type: GraphQLString },
     unit: { type: GraphQLString },
     quantity: { type: GraphQLInt },
+    lowStockQuantity: { type: GraphQLInt },
     price: { type: GraphQLInt },
     status: { type: StatusEnumType },
     createdBy: { type: GraphQLString },
