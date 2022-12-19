@@ -107,7 +107,7 @@ const mutation = {
       title: { type: GraphQLString },
       description: { type: GraphQLString },
       unit: { type: GraphQLString },
-      lowStokQuantity: { type: GraphQLInt },
+      lowStockQuantity: { type: GraphQLInt },
       price: { type: GraphQLInt },
       status: { type: StatusEnumType },
     },
