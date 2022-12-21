@@ -79,7 +79,7 @@ const mutation = {
           ]);
         if (inventoryWithItemNumber) {
           throw new Error(
-            'Inventory with this title already exists.',
+            'Inventory with this item number already exists.',
           );
         }
         if (inventoryWithTitle) {
@@ -131,7 +131,7 @@ const mutation = {
           inventoryWithItemNumber._id.toString() !== id
         ) {
           throw new Error(
-            'Inventory with this title already exists.',
+            'Inventory with this item number already exists.',
           );
         }
         if (
