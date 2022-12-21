@@ -7,6 +7,8 @@ import {
 
 import { INVENTORY_STOCK_TYPE } from '../../model/inventoryStock';
 
+import { InventoryObjectType } from './inventory';
+
 export const InventoryStockTypeEnumType = new GraphQLEnumType({
   name: 'InventoryStockType',
   values: {
@@ -19,7 +21,7 @@ export const InventoryStockObjectType = new GraphQLObjectType({
   name: 'InventoryStock',
   fields: {
     _id: { type: GraphQLString },
-    inventory: { type: GraphQLString },
+    inventory: { type: InventoryObjectType },
     type: { type: InventoryStockTypeEnumType },
     quantity: { type: GraphQLInt },
     createdBy: { type: GraphQLString },

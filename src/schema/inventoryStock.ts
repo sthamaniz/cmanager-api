@@ -97,7 +97,7 @@ const mutation = {
       try {
         const { id } = input;
 
-        const inventoryStockDetail =
+        const inventoryStockDetail: any =
           await inventoryStockModel.fetchById(id);
 
         const inventoryDetail = await inventoryModel.fetchById(

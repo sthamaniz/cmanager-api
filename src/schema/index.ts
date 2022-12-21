@@ -6,6 +6,7 @@ import bookingSchema from './booking';
 import inventorySchema from './inventory';
 import rosterSchema from './roster';
 import templateSchema from './template';
+import inventoryStock from './inventoryStock';
 
 export const queries = {
   ...userSchema.query,
@@ -14,6 +15,7 @@ export const queries = {
   ...inventorySchema.query,
   ...rosterSchema.query,
   ...templateSchema.query,
+  ...inventoryStock.query,
 };
 
 export const subscriptions = {
@@ -23,6 +25,7 @@ export const subscriptions = {
   ...inventorySchema.subscription,
   ...rosterSchema.subscription,
   ...templateSchema.subscription,
+  ...inventoryStock.subscription,
 };
 
 export const mutations = {
@@ -32,6 +35,7 @@ export const mutations = {
   ...inventorySchema.mutation,
   ...rosterSchema.mutation,
   ...templateSchema.mutation,
+  ...inventoryStock.mutation,
 };
 
 export const types = [
@@ -41,6 +45,7 @@ export const types = [
   ...inventorySchema.types,
   ...rosterSchema.types,
   ...templateSchema.types,
+  ...inventoryStock.types,
 ];
 
 export default new GraphQLSchema({
