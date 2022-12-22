@@ -7,6 +7,7 @@ import inventorySchema from './inventory';
 import rosterSchema from './roster';
 import templateSchema from './template';
 import inventoryStock from './inventoryStock';
+import inventoryService from './inventoryService';
 
 export const queries = {
   ...userSchema.query,
@@ -16,6 +17,7 @@ export const queries = {
   ...rosterSchema.query,
   ...templateSchema.query,
   ...inventoryStock.query,
+  ...inventoryService.query,
 };
 
 export const subscriptions = {
@@ -26,6 +28,7 @@ export const subscriptions = {
   ...rosterSchema.subscription,
   ...templateSchema.subscription,
   ...inventoryStock.subscription,
+  ...inventoryService.subscription,
 };
 
 export const mutations = {
@@ -36,6 +39,7 @@ export const mutations = {
   ...rosterSchema.mutation,
   ...templateSchema.mutation,
   ...inventoryStock.mutation,
+  ...inventoryService.mutation,
 };
 
 export const types = [
@@ -46,6 +50,7 @@ export const types = [
   ...rosterSchema.types,
   ...templateSchema.types,
   ...inventoryStock.types,
+  ...inventoryService.types,
 ];
 
 export default new GraphQLSchema({
