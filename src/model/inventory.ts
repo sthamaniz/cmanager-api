@@ -18,6 +18,9 @@ interface Inventory {
   quantity: number;
   lowStockQuantity: number;
   price: number;
+  serviceIntervalType?: string;
+  serviceInterval?: string;
+  serviceDueDate?: Date;
   status: string;
   createdBy?: string;
   updatedBy?: string;
@@ -37,6 +40,9 @@ const InventorySchema = new Schema(
     unit: { type: String, required: true },
     quantity: { type: Number, required: false, default: 0 },
     lowStockQuantity: { type: Number, required: true, default: 0 },
+    serviceIntervalType: { type: String, required: false },
+    serviceInterval: { type: Number, required: false },
+    serviceDueDate: { type: Number, required: false },
     price: { type: Number, required: true },
     status: { type: String, required: true },
     createdBy: {

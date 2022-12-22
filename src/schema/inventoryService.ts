@@ -65,6 +65,11 @@ const mutation = {
           inventory,
         );
 
+        if (!inventoryDetail || !inventoryDetail.serviceDueDate) {
+          throw new Error('Inventory not available for service.');
+        }
+
+        input.dueDate = inventoryDetail.serviceDueDate;
         const response = await inventoryServiceModel.create(input);
 
         return response;

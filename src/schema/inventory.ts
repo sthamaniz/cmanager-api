@@ -5,6 +5,7 @@ import {
   GraphQLError,
   GraphQLInt,
 } from 'graphql';
+import * as Moment from 'moment';
 
 import { StatusEnumType } from './object/common';
 import { InventoryObjectType } from './object/inventory';
@@ -61,6 +62,8 @@ const mutation = {
       unit: { type: new GraphQLNonNull(GraphQLString) },
       lowStockQuantity: { type: new GraphQLNonNull(GraphQLInt) },
       price: { type: new GraphQLNonNull(GraphQLInt) },
+      serviceIntervalType: { type: GraphQLString },
+      serviceInterval: { type: GraphQLInt },
       status: { type: new GraphQLNonNull(StatusEnumType) },
     },
     resolve: async (obj, input, request) => {
@@ -91,6 +94,13 @@ const mutation = {
         //generating slug
         input.slug = util.generateSlug(input.title);
 
+        //check and update servie due date if required
+        if (input.serviceIntervalType && input.serviceInterval) {
+          input.serviceDueDate = Moment()
+            .add(input.serviceInterval, input.serviceIntervalType)
+            .format();
+        }
+
         const response = await inventoryModel.create(input);
 
         return response;
@@ -109,6 +119,8 @@ const mutation = {
       unit: { type: GraphQLString },
       lowStockQuantity: { type: GraphQLInt },
       price: { type: GraphQLInt },
+      serviceIntervalType: { type: GraphQLString },
+      serviceInterval: { type: GraphQLInt },
       status: { type: StatusEnumType },
     },
     authenticate: true,
