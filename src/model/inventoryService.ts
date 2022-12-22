@@ -8,35 +8,30 @@ import {
 import { UserCollectionName } from './user';
 import { InventoryCollectionName, InventoryModel } from './inventory';
 
-export const InventoryStockCollectionName = 'inventory_stocks';
+export const InventoryServiceCollectionName = 'inventory_services';
 
-export const INVENTORY_STOCK_TYPE = {
-  IN: 'IN',
-  OUT: 'OUT',
-};
-
-interface InventoryStock {
+interface InventoryService {
   inventory: string;
-  type: string;
-  quantity: number;
+  dueDate: Date;
+  note?: number;
   createdBy?: string;
   updatedBy?: string;
 }
 
-export interface InventoryStockModel
-  extends InventoryStock,
+export interface InventoryServiceModel
+  extends InventoryService,
     BaseTime,
     Document {}
 
-const InventoryStockSchema = new Schema(
+const InventoryServiceSchema = new Schema(
   SchemaWithBaseTime({
     inventory: {
       type: Schema.Types.ObjectId,
       ref: InventoryCollectionName,
       required: true,
     },
-    type: { type: String, required: true },
-    quantity: { type: Number, required: true },
+    dueDate: { type: Date, required: true },
+    note: { type: String, required: false },
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: UserCollectionName,
@@ -50,43 +45,43 @@ const InventoryStockSchema = new Schema(
   }),
 );
 
-InventoryStockSchema.pre('save', preSaveAddBaseTime);
+InventoryServiceSchema.pre('save', preSaveAddBaseTime);
 
-// Creating the InventoryStockModel that is used by moongoose.
-export const InventoryStockModel = model<InventoryStockModel>(
-  'InventoryStock',
-  InventoryStockSchema,
-  InventoryStockCollectionName,
+// Creating the InventoryServiceModel that is used by moongoose.
+export const InventoryServiceModel = model<InventoryServiceModel>(
+  'InventoryService',
+  InventoryServiceSchema,
+  InventoryServiceCollectionName,
 );
 
 export const fetch = async (params: any = {}) => {
-  return InventoryStockModel.find(params).populate({
+  return InventoryServiceModel.find(params).populate({
     path: 'inventory',
     model: InventoryModel,
   });
 };
 
 export const fetchById = async (id: string) => {
-  return InventoryStockModel.findOne({ _id: id }).populate({
+  return InventoryServiceModel.findOne({ _id: id }).populate({
     path: 'inventory',
     model: InventoryModel,
   });
 };
 
-export const create = async (inventoryStock: InventoryStock) => {
+export const create = async (inventoryService: InventoryService) => {
   try {
-    return InventoryStockModel.create(inventoryStock);
+    return InventoryServiceModel.create(inventoryService);
   } catch (err) {
     throw err;
   }
 };
 
-export const update = async (id: string, inventoryStock: any) => {
+export const update = async (id: string, inventoryService: any) => {
   const updatedAt = new Date();
   try {
-    return InventoryStockModel.update(
+    return InventoryServiceModel.update(
       { _id: id },
-      { ...inventoryStock, updatedAt },
+      { ...inventoryService, updatedAt },
     );
   } catch (err) {
     throw err;
@@ -95,7 +90,7 @@ export const update = async (id: string, inventoryStock: any) => {
 
 export const remove = async (id: string) => {
   try {
-    return InventoryStockModel.remove({ _id: id });
+    return InventoryServiceModel.remove({ _id: id });
   } catch (err) {
     throw err;
   }

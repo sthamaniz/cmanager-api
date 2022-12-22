@@ -6,7 +6,10 @@ import {
   GraphQLInt,
 } from 'graphql';
 
-import { InventoryStockObjectType } from './object/inventoryStock';
+import {
+  InventoryStockObjectType,
+  InventoryStockTypeEnumType,
+} from './object/inventoryStock';
 
 import * as inventoryStockModel from '../model/inventoryStock';
 import * as inventoryModel from '../model/inventory';
@@ -55,7 +58,7 @@ const mutation = {
     type: InventoryStockObjectType,
     args: {
       inventory: { type: new GraphQLNonNull(GraphQLString) },
-      type: { type: new GraphQLNonNull(GraphQLString) },
+      type: { type: new GraphQLNonNull(InventoryStockTypeEnumType) },
       quantity: { type: new GraphQLNonNull(GraphQLInt) },
     },
     resolve: async (obj, input, request) => {
