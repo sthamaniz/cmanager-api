@@ -13,7 +13,7 @@ export const InventoryServiceCollectionName = 'inventory_services';
 interface InventoryService {
   inventory: string;
   dueDate: Date;
-  note?: number;
+  note?: string;
   createdBy?: string;
   updatedBy?: string;
 }

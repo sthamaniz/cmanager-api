@@ -5,6 +5,7 @@ import {
   GraphQLError,
   GraphQLInt,
 } from 'graphql';
+import * as Moment from 'moment';
 
 import { InventoryServiceObjectType } from './object/inventoryService';
 
@@ -55,19 +56,36 @@ const mutation = {
     type: InventoryServiceObjectType,
     args: {
       inventory: { type: new GraphQLNonNull(GraphQLString) },
-      note: { type: GraphQLInt },
+      note: { type: GraphQLString },
     },
     resolve: async (obj, input, request) => {
       try {
-        const { inventory, type, quantity } = input;
+        const { inventory } = input;
 
         const inventoryDetail = await inventoryModel.fetchById(
           inventory,
         );
 
-        if (!inventoryDetail || !inventoryDetail.serviceDueDate) {
+        if (
+          !inventoryDetail ||
+          !inventoryDetail.serviceInterval ||
+          !inventoryDetail.serviceIntervalType ||
+          !inventoryDetail.serviceDueDate
+        ) {
           throw new Error('Inventory not available for service.');
         }
+
+        //update inventory next service due date
+        const updateParams = {
+          serviecDueDate: Moment()
+            .add(
+              inventoryDetail.serviceInterval as Moment.DurationInputArg1,
+              inventoryDetail.serviceIntervalType as Moment.DurationInputArg2,
+            )
+            .format(),
+        };
+
+        await inventoryModel.update(inventory, updateParams);
 
         input.dueDate = inventoryDetail.serviceDueDate;
         const response = await inventoryServiceModel.create(input);
@@ -93,6 +111,27 @@ const mutation = {
 
         const inventoryDetail = await inventoryModel.fetchById(
           inventoryServiceDetail.inventory._id,
+        );
+
+        if (
+          !inventoryDetail ||
+          !inventoryDetail.serviceInterval ||
+          !inventoryDetail.serviceIntervalType ||
+          !inventoryDetail.serviceDueDate
+        ) {
+          throw new Error('Inventory not available for service.');
+        }
+
+        //update inventory previous service due date
+        const updateParams = {
+          serviecDueDate: Moment(
+            inventoryServiceDetail.dueDate,
+          ).format(),
+        };
+
+        await inventoryModel.update(
+          inventoryServiceDetail.inventory._id,
+          updateParams,
         );
 
         //updating

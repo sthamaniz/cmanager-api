@@ -12,7 +12,7 @@ export const InventoryServiceObjectType = new GraphQLObjectType({
     _id: { type: GraphQLString },
     inventory: { type: InventoryObjectType },
     dueDate: { type: GraphQLString },
-    note: { type: GraphQLInt },
+    note: { type: GraphQLString },
     createdBy: { type: GraphQLString },
     updatedBy: { type: GraphQLString },
     createdAt: { type: GraphQLString },

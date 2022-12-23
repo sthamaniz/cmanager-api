@@ -155,8 +155,21 @@ const mutation = {
           );
         }
 
+        const inventory = await inventoryModel.fetchById(id);
+
         //generating slug
         input.slug = util.generateSlug(input.title);
+
+        //check and update servie due date if required
+        if (
+          input.serviceIntervalType &&
+          input.serviceInterval &&
+          !inventory.serviceDueDate
+        ) {
+          input.serviceDueDate = Moment()
+            .add(input.serviceInterval, input.serviceIntervalType)
+            .format();
+        }
 
         //updating
         delete input.id;
