@@ -6,6 +6,7 @@ import bookingSchema from './booking';
 import inventorySchema from './inventory';
 import rosterSchema from './roster';
 import templateSchema from './template';
+import inventoryCategory from './inventoryCategory';
 import inventoryStock from './inventoryStock';
 import inventoryService from './inventoryService';
 
@@ -16,6 +17,7 @@ export const queries = {
   ...inventorySchema.query,
   ...rosterSchema.query,
   ...templateSchema.query,
+  ...inventoryCategory.query,
   ...inventoryStock.query,
   ...inventoryService.query,
 };
@@ -38,6 +40,7 @@ export const mutations = {
   ...inventorySchema.mutation,
   ...rosterSchema.mutation,
   ...templateSchema.mutation,
+  ...inventoryCategory.mutation,
   ...inventoryStock.mutation,
   ...inventoryService.mutation,
 };
@@ -50,6 +53,7 @@ export const types = [
   ...rosterSchema.types,
   ...templateSchema.types,
   ...inventoryStock.types,
+  ...inventoryCategory.types,
   ...inventoryService.types,
 ];
 
