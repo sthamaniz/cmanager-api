@@ -4,6 +4,8 @@ import {
   GraphQLBoolean,
 } from 'graphql';
 
+import { StatusEnumType } from './common';
+
 export const InventoryCategoryObjectType = new GraphQLObjectType({
   name: 'InventoryCategory',
   fields: {
@@ -12,6 +14,7 @@ export const InventoryCategoryObjectType = new GraphQLObjectType({
     slug: { type: GraphQLString },
     description: { type: GraphQLString },
     isServicable: { type: GraphQLBoolean },
+    status: { type: StatusEnumType },
     createdBy: { type: GraphQLString },
     updatedBy: { type: GraphQLString },
     createdAt: { type: GraphQLString },
