@@ -17,7 +17,6 @@ interface Inventory {
   unit: string;
   quantity: number;
   lowStockQuantity: number;
-  price: number;
   serviceIntervalType?: string;
   serviceInterval?: number;
   serviceDueDate?: Date;
@@ -43,7 +42,6 @@ const InventorySchema = new Schema(
     serviceIntervalType: { type: String, required: false },
     serviceInterval: { type: Number, required: false },
     serviceDueDate: { type: Date, required: false },
-    price: { type: Number, required: true },
     status: { type: String, required: true },
     createdBy: {
       type: Schema.Types.ObjectId,

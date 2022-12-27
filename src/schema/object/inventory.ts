@@ -17,7 +17,6 @@ export const InventoryObjectType = new GraphQLObjectType({
     unit: { type: GraphQLString },
     quantity: { type: GraphQLInt },
     lowStockQuantity: { type: GraphQLInt },
-    price: { type: GraphQLInt },
     serviceIntervalType: { type: GraphQLString },
     serviceInterval: { type: GraphQLInt },
     serviceDueDate: { type: GraphQLString },
