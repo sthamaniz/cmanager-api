@@ -15,6 +15,7 @@ interface InventoryCategory {
   slug: string;
   description: string;
   isServicable: string;
+  status: string;
   createdBy?: string;
   updatedBy?: string;
 }
@@ -30,6 +31,7 @@ const InventoryCategorySchema = new Schema(
     slug: { type: String, required: false },
     description: { type: String, required: true },
     isServicable: { type: Boolean, required: true, default: false },
+    status: { type: String, required: true },
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: UserCollectionName,
