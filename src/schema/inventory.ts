@@ -56,6 +56,7 @@ const mutation = {
   inventoryCreate: {
     type: InventoryObjectType,
     args: {
+      inventoryCategory: { type: new GraphQLNonNull(GraphQLString) },
       itemNumber: { type: new GraphQLNonNull(GraphQLString) },
       title: { type: new GraphQLNonNull(GraphQLString) },
       description: { type: new GraphQLNonNull(GraphQLString) },
@@ -112,6 +113,7 @@ const mutation = {
     type: InventoryObjectType,
     args: {
       id: { type: new GraphQLNonNull(GraphQLString) },
+      inventoryCategory: { type: GraphQLString },
       itemNumber: { type: GraphQLString },
       title: { type: GraphQLString },
       description: { type: GraphQLString },

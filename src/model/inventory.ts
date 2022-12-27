@@ -6,10 +6,15 @@ import {
 } from './base';
 
 import { UserCollectionName } from './user';
+import {
+  InventoryCategoryCollectionName,
+  InventoryCategoryModel,
+} from './inventoryCategory';
 
 export const InventoryCollectionName = 'inventories';
 
 interface Inventory {
+  inventoryCategory: string;
   itemNumber: string;
   title: string;
   slug: string;
@@ -32,6 +37,11 @@ export interface InventoryModel
 
 const InventorySchema = new Schema(
   SchemaWithBaseTime({
+    inventoryCategory: {
+      type: Schema.Types.ObjectId,
+      ref: InventoryCategoryCollectionName,
+      required: true,
+    },
     itemNumber: { type: String, required: true },
     title: { type: String, required: true },
     slug: { type: String, required: false },
@@ -66,11 +76,17 @@ export const InventoryModel = model<InventoryModel>(
 );
 
 export const fetch = async (params: any = {}) => {
-  return InventoryModel.find(params);
+  return InventoryModel.find(params).populate({
+    path: 'inventoryCategory',
+    model: InventoryCategoryModel,
+  });
 };
 
 export const fetchById = async (id: string) => {
-  return InventoryModel.findOne({ _id: id });
+  return InventoryModel.findOne({ _id: id }).populate({
+    path: 'inventoryCategory',
+    model: InventoryCategoryModel,
+  });
 };
 
 export const create = async (inventory: Inventory) => {

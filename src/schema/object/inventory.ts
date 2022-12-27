@@ -5,11 +5,13 @@ import {
 } from 'graphql';
 
 import { StatusEnumType } from './common';
+import { InventoryCategoryObjectType } from './inventoryCategory';
 
 export const InventoryObjectType = new GraphQLObjectType({
   name: 'Inventory',
   fields: {
     _id: { type: GraphQLString },
+    inventoryCategory: { type: InventoryCategoryObjectType },
     itemNumber: { type: GraphQLString },
     title: { type: GraphQLString },
     slug: { type: GraphQLString },
