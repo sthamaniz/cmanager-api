@@ -21,6 +21,7 @@ export const BOOKING_PRICE_TYPE = {
 };
 
 export const BOOKING_FREQUENCY = {
+  ONE_OFF: 'ONE_OFF', // once everyday
   DAILY: 'DAILY', // once everyday
   WEEKLY: 'WEEKLY', // once in 7 days
   FORTNIGHTLY: 'FORTNIGHTLY', // once in 14 days

@@ -77,6 +77,7 @@ export const updateTaskInRoster = async () => {
   try {
     const bookedBookings = await bookingModel.fetch({
       status: bookingModel.BOOKING_STATUS.BOOKED,
+      frequency: { $ne: bookingModel.BOOKING_FREQUENCY.ONE_OFF },
     });
 
     //add filter for unique bookings in roster

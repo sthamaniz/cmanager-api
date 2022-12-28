@@ -36,6 +36,7 @@ export const BookingPriceTypeEnumType = new GraphQLEnumType({
 export const BookingFrequencyEnumType = new GraphQLEnumType({
   name: 'BookingFrequency',
   values: {
+    ONE_OFF: { value: BOOKING_FREQUENCY.ONE_OFF },
     DAILY: { value: BOOKING_FREQUENCY.DAILY },
     WEEKLY: { value: BOOKING_FREQUENCY.WEEKLY },
     FORTNIGHTLY: { value: BOOKING_FREQUENCY.FORTNIGHTLY },
