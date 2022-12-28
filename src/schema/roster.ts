@@ -1,4 +1,9 @@
-import { GraphQLList, GraphQLNonNull, GraphQLString } from 'graphql';
+import {
+  GraphQLList,
+  GraphQLNonNull,
+  GraphQLString,
+  GraphQLError,
+} from 'graphql';
 import * as Moment from 'moment';
 
 import {
@@ -106,7 +111,27 @@ const publish = (change = null, data = {}) => {
   pubSub.publish(publishChange, data);
 };
 
-const mutation = {};
+const mutation = {
+  rosterDeleteById: {
+    type: RosterObjectType,
+    args: {
+      id: { type: new GraphQLNonNull(GraphQLString) },
+    },
+    authenticate: true,
+    resolve: async (obj, input, request) => {
+      try {
+        const { id } = input;
+
+        //updating
+        const response = await rosterModel.remove(id);
+
+        return response;
+      } catch (error) {
+        throw new GraphQLError(error.message);
+      }
+    },
+  },
+};
 
 export default {
   query,
