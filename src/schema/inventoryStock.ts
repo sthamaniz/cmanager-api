@@ -5,6 +5,7 @@ import {
   GraphQLError,
   GraphQLInt,
 } from 'graphql';
+import * as Moment from 'moment';
 
 import {
   InventoryStockObjectType,
@@ -19,9 +20,40 @@ import { pubSub, PUBLISH_CHANGE } from '../service/subscription';
 const query = {
   inventoryStocks: {
     type: new GraphQLList(InventoryStockObjectType),
-    args: {},
+    args: {
+      startDate: {
+        type: GraphQLString,
+      },
+      endDate: {
+        type: GraphQLString,
+      },
+    },
     authenticate: true,
-    resolve: async (root, {}) => inventoryStockModel.fetch(),
+    resolve: async (root, { startDate, endDate }) => {
+      let params: any = {};
+
+      if (startDate) {
+        params = {
+          ...params,
+          date: {
+            ...(params.date || {}),
+            $gte: Moment(startDate).startOf('day').format(),
+          },
+        };
+      }
+
+      if (endDate) {
+        params = {
+          ...params,
+          date: {
+            ...(params.date || {}),
+            $lte: Moment(endDate).endOf('day').format(),
+          },
+        };
+      }
+
+      return inventoryStockModel.fetch(params);
+    },
   },
   inventoryStockById: {
     type: InventoryStockObjectType,
