@@ -29,6 +29,8 @@ export const USER_ROLES = {
 
 export const USER_ID_TYPES = {
   DRIVING_LICENSE: 'DRIVING_LICENSE',
+  PASSPORT: 'PASSPORT',
+  PHOTO_ID: 'PHOTO_ID',
 };
 
 interface User {

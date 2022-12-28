@@ -48,6 +48,8 @@ export const UserIdTypeEnumType = new GraphQLEnumType({
   name: 'UserIdType',
   values: {
     DRIVING_LICENSE: { value: USER_ID_TYPES.DRIVING_LICENSE },
+    PASSPORT: { value: USER_ID_TYPES.PASSPORT },
+    PHOTO_ID: { value: USER_ID_TYPES.PHOTO_ID },
   },
 });
 
