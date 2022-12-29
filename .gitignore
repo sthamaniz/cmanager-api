@@ -49,3 +49,6 @@ Thumbs.db
 #uploads
 uploads/*
 !uploads/.gitkeep
+
+#logs
+logs

@@ -8,7 +8,7 @@ const router = Router();
 
 router.use('/_jobs', jobRoutes);
 
-router.use('/_mail', mailRoutes);
+router.use('/_mails', mailRoutes);
 
 router.use('/assets', assetRoute);
 

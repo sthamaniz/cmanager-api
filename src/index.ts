@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as morgan from 'morgan';
 import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
+import * as fileUpload from 'express-fileupload';
 import * as errorhandler from 'errorhandler';
 import * as mongoose from 'mongoose';
 import * as graphqlHTTP from 'express-graphql-subscriptions';
@@ -49,6 +50,9 @@ app.use(
 
 // Parse application/json
 app.use(bodyParser.json());
+
+// Parse files for upload
+app.use(fileUpload());
 
 //get route for checking the status of api server
 app.get('/', (req: express.Request, res: express.Response) => {

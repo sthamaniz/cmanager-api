@@ -71,7 +71,7 @@ export const UserObjectType = new GraphQLObjectType({
     taxFileNumber: { type: GraphQLInt },
     idType: { type: UserIdTypeEnumType },
     idNumber: { type: GraphQLInt },
-    idImage: { type: UserIdTypeEnumType },
+    idImage: { type: GraphQLString },
     status: { type: StatusEnumType },
     createdBy: { type: GraphQLString },
     updatedBy: { type: GraphQLString },
