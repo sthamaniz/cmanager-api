@@ -49,6 +49,7 @@ interface User {
   taxFileNumber?: number;
   idType?: string;
   idNumber?: number;
+  idImage?: string;
   status: string;
   createdBy?: string;
   updatedBy?: string;
@@ -77,6 +78,7 @@ const UserSchema = new Schema(
     taxFileNumber: { type: Number, required: false },
     idType: { type: String, required: false },
     idNumber: { type: Number, required: false },
+    idImage: { type: String, required: false },
     status: { type: String, required: true },
     createdBy: {
       type: Schema.Types.ObjectId,

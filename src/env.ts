@@ -15,4 +15,5 @@ export default {
   mailTransporter: process.env.MAIL_TRANSPORTER || 'etheral',
   mailUser: process.env.MAIL_USER,
   mailPass: process.env.MAIL_PASS,
+  uploadDir: process.env.UPLOAD_DIR || 'uploads',
 };

@@ -12,8 +12,8 @@ import {
   InventoryStockTypeEnumType,
 } from './object/inventoryStock';
 
-import * as inventoryStockModel from '../model/inventoryStock';
 import * as inventoryModel from '../model/inventory';
+import * as inventoryStockModel from '../model/inventoryStock';
 
 import { pubSub, PUBLISH_CHANGE } from '../service/subscription';
 
@@ -35,8 +35,8 @@ const query = {
       if (startDate) {
         params = {
           ...params,
-          date: {
-            ...(params.date || {}),
+          createdAt: {
+            ...(params.createdAt || {}),
             $gte: Moment(startDate).startOf('day').format(),
           },
         };
@@ -45,8 +45,8 @@ const query = {
       if (endDate) {
         params = {
           ...params,
-          date: {
-            ...(params.date || {}),
+          createdAt: {
+            ...(params.createdAt || {}),
             $lte: Moment(endDate).endOf('day').format(),
           },
         };

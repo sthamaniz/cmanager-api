@@ -45,3 +45,7 @@ Thumbs.db
 
 #env
 .env
+
+#uploads
+uploads/*
+!uploads/.gitkeep
