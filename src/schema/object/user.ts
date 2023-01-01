@@ -72,6 +72,7 @@ export const UserObjectType = new GraphQLObjectType({
     idType: { type: UserIdTypeEnumType },
     idNumber: { type: GraphQLInt },
     idImage: { type: GraphQLString },
+    emergencyContactName: { type: GraphQLString },
     emergencyContactNumber: { type: GraphQLString },
     status: { type: StatusEnumType },
     createdBy: { type: GraphQLString },

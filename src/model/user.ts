@@ -50,6 +50,7 @@ interface User {
   idType?: string;
   idNumber?: number;
   idImage?: string;
+  emergencyContactName?: string;
   emergencyContactNumber?: string;
   status: string;
   createdBy?: string;
@@ -80,6 +81,7 @@ const UserSchema = new Schema(
     idType: { type: String, required: false },
     idNumber: { type: Number, required: false },
     idImage: { type: String, required: false },
+    emergencyContactName: { type: String, required: false },
     emergencyContactNumber: { type: String, required: false },
     status: { type: String, required: true },
     createdBy: {
