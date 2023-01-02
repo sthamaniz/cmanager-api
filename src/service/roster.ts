@@ -124,3 +124,22 @@ export const updateTaskInRoster = async () => {
     throw err;
   }
 };
+
+export const removeTaskInRoster = async (bookingId: string) => {
+  try {
+    const tomorrow = Moment().add(1, 'day').startOf('day').format();
+
+    const rostersToDelete = await rosterModel.fetch({
+      date: { $gte: tomorrow },
+      booking: bookingId,
+    });
+
+    await Promise.all(
+      rostersToDelete.map((rtd: any) => rosterModel.remove(rtd._id)),
+    );
+
+    return `removed all tasks in roster`;
+  } catch (error) {
+    throw error;
+  }
+};

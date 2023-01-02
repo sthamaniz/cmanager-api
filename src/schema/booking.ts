@@ -17,6 +17,7 @@ import * as bookingModel from '../model/booking';
 import * as rosterModel from '../model/roster';
 
 import { pubSub, PUBLISH_CHANGE } from '../service/subscription';
+import { removeTaskInRoster } from '../service/roster';
 
 import * as mailTemplate from '../mail/template';
 
@@ -244,6 +245,10 @@ const mutation = {
             booking: id,
             date: input.startDate || booking.startDate,
           });
+        }
+
+        if (input.frequency !== booking.frequency) {
+          await removeTaskInRoster(booking._id);
         }
 
         //fetch full booking detail
