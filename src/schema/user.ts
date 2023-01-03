@@ -267,7 +267,7 @@ const mutation = {
     authenticate: true,
     resolve: async (obj, input, request) => {
       try {
-        const { id, mobile, hours } = input;
+        const { id, mobile } = input;
 
         // Validation
         if (!validation.isMobileValid(mobile)) {
@@ -285,9 +285,11 @@ const mutation = {
         }
 
         //validation for already registered
-        const [userWithMobile]: any = await userModel.fetch({
-          mobile,
-        });
+        const [{ data: userWithMobile }]: any = await userModel.fetch(
+          {
+            mobile,
+          },
+        );
         if (userWithMobile && userWithMobile._id.toString() !== id) {
           throw new Error('User with this mobile already exists.');
         }

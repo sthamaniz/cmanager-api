@@ -23,7 +23,10 @@ router.post('/', authorize, (req: Request, res: Response) => {
       imagePath = [];
 
       file.forEach((f) => {
-        const fileName = f.name.split(' ').join('_');
+        const date = new Date();
+        const fileName = `${date.getTime()}_${f.name
+          .split(' ')
+          .join('_')}`;
         const filePath = `${folderPath}/${fileName}`;
 
         f.mv(filePath, (error: any) => {
@@ -36,7 +39,10 @@ router.post('/', authorize, (req: Request, res: Response) => {
         imagePath.push(`${group}/${fileName}`);
       });
     } else {
-      const fileName = file.name.split(' ').join('_');
+      const date = new Date();
+      const fileName = `${date.getTime()}_${file.name
+        .split(' ')
+        .join('_')}`;
       const filePath = `${folderPath}/${fileName}`;
 
       file.mv(filePath, (error: any) => {
