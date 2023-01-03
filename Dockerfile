@@ -7,6 +7,8 @@ COPY package.json yarn.lock /api/
 
 RUN yarn install
 
+RUN chmod 777 uploads
+
 COPY . /api/
 
 CMD yarn dev
