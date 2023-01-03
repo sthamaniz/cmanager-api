@@ -162,7 +162,7 @@ const mutation = {
         const { data: user } = await userModel.fetch({
           email: email.toLowerCase(),
         });
-        if (!user && user.length) {
+        if (!user || !user.length) {
           throw new GraphQLError('Email Not Found.');
         }
 
@@ -285,12 +285,14 @@ const mutation = {
         }
 
         //validation for already registered
-        const [{ data: userWithMobile }]: any = await userModel.fetch(
-          {
-            mobile,
-          },
-        );
-        if (userWithMobile && userWithMobile._id.toString() !== id) {
+        const { data: userWithMobile } = await userModel.fetch({
+          mobile,
+        });
+        if (
+          userWithMobile &&
+          userWithMobile.length &&
+          userWithMobile[0]._id.toString() !== id
+        ) {
           throw new Error('User with this mobile already exists.');
         }
 
