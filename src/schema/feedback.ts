@@ -66,12 +66,30 @@ const mutation = {
   feedbackCreate: {
     type: FeedbackObjectType,
     args: {
-      user: { type: new GraphQLNonNull(GraphQLString) },
       value: { type: new GraphQLNonNull(GraphQLString) },
       isRead: { type: GraphQLBoolean },
     },
     resolve: async (obj, input, request) => {
       try {
+        const response = await feedbackModel.create(input);
+
+        return response;
+      } catch (error) {
+        throw new GraphQLError(error.message);
+      }
+    },
+  },
+  customerFeedbackCreate: {
+    type: FeedbackObjectType,
+    args: {
+      value: { type: new GraphQLNonNull(GraphQLString) },
+      isRead: { type: GraphQLBoolean },
+    },
+    resolve: async (obj, input, request) => {
+      try {
+        const requestUser = request.userId;
+
+        input.user = requestUser;
         const response = await feedbackModel.create(input);
 
         return response;
