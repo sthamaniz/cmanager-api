@@ -6,7 +6,6 @@ import {
   GraphQLBoolean,
 } from 'graphql';
 
-import { StatusEnumType } from './object/common';
 import { FeedbackObjectType } from './object/feedback';
 
 import * as feedbackModel from '../model/feedback';
@@ -21,6 +20,18 @@ const query = {
     args: {},
     authenticate: true,
     resolve: async (root, {}) => feedbackModel.fetch(),
+  },
+  customerFeedbacks: {
+    type: new GraphQLList(FeedbackObjectType),
+    args: {},
+    authenticate: true,
+    resolve: async (root, {}, request) => {
+      const params: any = {
+        user: request.userId,
+      };
+
+      return feedbackModel.fetch(params);
+    },
   },
   feedbackById: {
     type: FeedbackObjectType,
