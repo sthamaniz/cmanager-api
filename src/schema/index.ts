@@ -6,9 +6,10 @@ import bookingSchema from './booking';
 import inventorySchema from './inventory';
 import rosterSchema from './roster';
 import templateSchema from './template';
-import inventoryCategory from './inventoryCategory';
-import inventoryStock from './inventoryStock';
-import inventoryService from './inventoryService';
+import inventoryCategorySchema from './inventoryCategory';
+import inventoryStockSchema from './inventoryStock';
+import inventoryServiceSchema from './inventoryService';
+import feedbackSchema from './feedback';
 
 export const queries = {
   ...userSchema.query,
@@ -17,9 +18,10 @@ export const queries = {
   ...inventorySchema.query,
   ...rosterSchema.query,
   ...templateSchema.query,
-  ...inventoryCategory.query,
-  ...inventoryStock.query,
-  ...inventoryService.query,
+  ...inventoryCategorySchema.query,
+  ...inventoryStockSchema.query,
+  ...inventoryServiceSchema.query,
+  ...feedbackSchema.query,
 };
 
 export const subscriptions = {
@@ -29,8 +31,9 @@ export const subscriptions = {
   ...inventorySchema.subscription,
   ...rosterSchema.subscription,
   ...templateSchema.subscription,
-  ...inventoryStock.subscription,
-  ...inventoryService.subscription,
+  ...inventoryStockSchema.subscription,
+  ...inventoryServiceSchema.subscription,
+  ...feedbackSchema.subscription,
 };
 
 export const mutations = {
@@ -40,9 +43,10 @@ export const mutations = {
   ...inventorySchema.mutation,
   ...rosterSchema.mutation,
   ...templateSchema.mutation,
-  ...inventoryCategory.mutation,
-  ...inventoryStock.mutation,
-  ...inventoryService.mutation,
+  ...inventoryCategorySchema.mutation,
+  ...inventoryStockSchema.mutation,
+  ...inventoryServiceSchema.mutation,
+  ...feedbackSchema.mutation,
 };
 
 export const types = [
@@ -52,9 +56,10 @@ export const types = [
   ...inventorySchema.types,
   ...rosterSchema.types,
   ...templateSchema.types,
-  ...inventoryStock.types,
-  ...inventoryCategory.types,
-  ...inventoryService.types,
+  ...inventoryStockSchema.types,
+  ...inventoryCategorySchema.types,
+  ...inventoryServiceSchema.types,
+  ...feedbackSchema.types,
 ];
 
 export default new GraphQLSchema({
